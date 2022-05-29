@@ -35,12 +35,22 @@ const Statistics = ({ good, neutral, bad }) => {
   return (
     <div>
       <h1>Statistics</h1>
-      <Display counter={good} text="good" />
-      <Display counter={neutral} text="neutral" />
-      <Display counter={bad} text="bad" />
-      <Display counter={totalClicks()} text="all" />
-      <Display counter={calculateAverage()} text="average" />
-      <Display counter={calculatePositivePercent()} text="positive" />
+      {totalClicks() === 0 && 
+        <>
+          <p>No feedback given</p>
+        </>
+      }
+      {totalClicks() > 0 &&
+        <>
+          <Display counter={good} text="good" />
+          <Display counter={neutral} text="neutral" />
+          <Display counter={bad} text="bad" />
+          <Display counter={totalClicks()} text="all" />
+          <Display counter={calculateAverage()} text="average" />
+          <Display counter={calculatePositivePercent()} text="positive" />
+        </>
+      }
+
     </div>
   )
 }
