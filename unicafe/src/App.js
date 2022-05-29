@@ -20,13 +20,28 @@ const App = () => {
   // use the set function to alter the state instead of directly changing the state
   // ex. Write: setGood(good + 1) 
   //     Don't write: good = good + 1
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
   const increaseGood = () => setGood(good + 1);
   const increaseNeutral = () => setNeutral(neutral + 1);
-  const increaseBad = () => setBad(bad + 1)
+  const increaseBad = () => setBad(bad + 1);
+
+  const totalClicks = () => {
+    return good + neutral + bad;
+  }
+
+  const calculateAverage = () => {
+    const total = totalClicks();
+    return (good - bad) / total || 0;
+  }
+
+  const calculatePositivePercent = () => {
+    const total = totalClicks();
+    const value = (good / total) * 100 || 0;
+    return value + '%';
+  }
 
   return (
     <div>
@@ -35,9 +50,12 @@ const App = () => {
       <Button onClick={increaseNeutral} text="neutral" />
       <Button onClick={increaseBad} text="bad" />
       <h1>Statistics</h1>
-      <Display counter={good} text="good"/>
-      <Display counter={neutral} text="neutral"/>
-      <Display counter={bad} text="bad"/>
+      <Display counter={good} text="good" />
+      <Display counter={neutral} text="neutral" />
+      <Display counter={bad} text="bad" />
+      <Display counter={totalClicks()} text="all" />
+      <Display counter={calculateAverage()} text="average" />
+      <Display counter={calculatePositivePercent()} text="positive" />
     </div>
   )
 }
