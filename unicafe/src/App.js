@@ -3,9 +3,10 @@ import { useState } from 'react'
 // examples from part 1c https://fullstackopen.com/en/part1/component_state_event_handlers#refactoring-the-components
 const StatisticLine = ({ text, value }) => {
   return (
-    <div>
-      {text} feedback = {value}
-    </div>
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   )
 }
 
@@ -41,14 +42,16 @@ const Statistics = ({ good, neutral, bad }) => {
         </>
       }
       {totalClicks() > 0 &&
-        <>
-          <StatisticLine value={good} text="good" />
-          <StatisticLine value={neutral} text="neutral" />
-          <StatisticLine value={bad} text="bad" />
-          <StatisticLine value={totalClicks()} text="all" />
-          <StatisticLine value={calculateAverage()} text="average" />
-          <StatisticLine value={calculatePositivePercent()} text="positive" />
-        </>
+        <table>
+          <tbody>
+            <StatisticLine value={good} text="good" />
+            <StatisticLine value={neutral} text="neutral" />
+            <StatisticLine value={bad} text="bad" />
+            <StatisticLine value={totalClicks()} text="all" />
+            <StatisticLine value={calculateAverage()} text="average" />
+            <StatisticLine value={calculatePositivePercent()} text="positive" />
+          </tbody>
+        </table>
       }
     </div>
   )
