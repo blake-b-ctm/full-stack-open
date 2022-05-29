@@ -1,17 +1,43 @@
-const Hello = (props) => {
+import {useState} from 'react';
+
+// counter is a shortcut for props.counter
+// read https://fullstackopen.com/en/part1/component_state_event_handlers#destructuring for more info
+const Display = ({ counter }) => {
   return (
     <div>
-      <p>Hello {props.name}, it is {props.day}</p>
+      {counter}
     </div>
   )
 }
 
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>
+    {text}
+  </button>
+)
+
 const App = () => {
-  const day = 'Sunday';
+  const [ counter, setCounter ] = useState(0)
+
+  const increaseByOne = () => setCounter(counter + 1)
+  const decreaseByOne = () => setCounter(counter - 1)
+  const setToZero = () => setCounter(0)
 
   return (
     <div>
-      <Hello name="Blake" day={day} />
+      <Display counter={counter}/>
+      <Button
+        onClick={increaseByOne}
+        text='plus'
+      />
+      <Button
+        onClick={setToZero}
+        text='zero'
+      />     
+      <Button
+        onClick={decreaseByOne}
+        text='minus'
+      />           
     </div>
   )
 }
