@@ -15,19 +15,8 @@ const Button = ({ onClick, text }) => (
   </button>
 )
 
-const App = () => {
-  // save clicks of each button to its own state
-  // use the set function to alter the state instead of directly changing the state
-  // ex. Write: setGood(good + 1) 
-  //     Don't write: good = good + 1
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
-
-  const increaseGood = () => setGood(good + 1);
-  const increaseNeutral = () => setNeutral(neutral + 1);
-  const increaseBad = () => setBad(bad + 1);
-
+// state variables are still held in App component, passed in as props to the Statistics component 
+const Statistics = ({ good, neutral, bad }) => {
   const totalClicks = () => {
     return good + neutral + bad;
   }
@@ -45,10 +34,6 @@ const App = () => {
 
   return (
     <div>
-      <h1>Give Feedback</h1>
-      <Button onClick={increaseGood} text="good" />
-      <Button onClick={increaseNeutral} text="neutral" />
-      <Button onClick={increaseBad} text="bad" />
       <h1>Statistics</h1>
       <Display counter={good} text="good" />
       <Display counter={neutral} text="neutral" />
@@ -56,6 +41,30 @@ const App = () => {
       <Display counter={totalClicks()} text="all" />
       <Display counter={calculateAverage()} text="average" />
       <Display counter={calculatePositivePercent()} text="positive" />
+    </div>
+  )
+}
+
+const App = () => {
+  // save clicks of each button to its own state
+  // use the set function to alter the state instead of directly changing the state
+  // ex. Write: setGood(good + 1) 
+  //     Don't write: good = good + 1
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+
+  const increaseGood = () => setGood(good + 1);
+  const increaseNeutral = () => setNeutral(neutral + 1);
+  const increaseBad = () => setBad(bad + 1);
+
+  return (
+    <div>
+      <h1>Give Feedback</h1>
+      <Button onClick={increaseGood} text="good" />
+      <Button onClick={increaseNeutral} text="neutral" />
+      <Button onClick={increaseBad} text="bad" />
+      <Statistics good={good} neutral={neutral} bad={bad}/>
     </div>
   )
 }
