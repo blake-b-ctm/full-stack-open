@@ -24,8 +24,8 @@ const App = () => {
     return Math.floor(Math.random() * max);
   }
   const selectRandomAnecdote = () => {
-    // we need an array index, so send (anecdotes.length - 1) as maximum value to getRandomInt()
-    setSelected(getRandomInt(anecdotes.length - 1));
+    // getRandomInt(max) will return integers UP to the max value, but never return the max value, so we use anecdotes.length as max
+    setSelected(getRandomInt(anecdotes.length));
   }
 
   return (
